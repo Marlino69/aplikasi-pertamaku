@@ -5,7 +5,7 @@ import CommentSection from './components/CommentSection.vue';
 const userId = ref('');
 const users = ref(null);
 const newEmail = ref('');
-const apiUrl = process.env.VUE_APP_API_URL;
+
 
 const getUser = async () => {
   try {
@@ -17,7 +17,7 @@ const getUser = async () => {
     }
 
     // Lakukan request ke API
-    const response = await fetch(`${apiUrl}/api/user/${encodeURIComponent(userIdValue)}`);
+    const response = await fetch(`http://localhost:3000/api/user/${encodeURIComponent(userIdValue)}`);
     
     // Cek apakah respon berhasil (status 200-299)
     if (!response.ok) {
@@ -52,7 +52,7 @@ const changeEmail = async () => {
     return;
   }
 
-  await fetch(`${apiUrl}/api/change-email`, {
+  await fetch('http://localhost:3000/api/change-email', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
