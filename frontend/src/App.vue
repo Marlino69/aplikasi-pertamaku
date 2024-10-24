@@ -7,7 +7,7 @@ const users = ref(null);
 const newEmail = ref('');
 
 const getUser = async () => {
-  const response = await fetch(`http://localhost:3000/api/${encodeURIComponent(userId.value)}`);
+  const response = await fetch(`http://localhost:3000/api/user/${encodeURIComponent(userId.value)}`);
   users.value = await response.json();
 };
 
