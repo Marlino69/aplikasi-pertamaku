@@ -7,9 +7,41 @@ const users = ref(null);
 const newEmail = ref('');
 
 const getUser = async () => {
-  const response = await fetch(`http://localhost:3000/api/user/${encodeURIComponent(userId.value)}`);
-  users.value = await response.json();
+  try {
+    // Validasi apakah input userId adalah angka
+    const userIdValue = userId.value.trim();
+    if (!/^\d+$/.test(userIdValue)) {  // RegEx untuk memeriksa apakah hanya angka yang dimasukkan
+      alert("Please enter a valid numeric user ID");
+      return;
+    }
+
+    // Lakukan request ke API
+    const response = await fetch(`http://localhost:3000/api/user/${encodeURIComponent(userIdValue)}`);
+    
+    // Cek apakah respon berhasil (status 200-299)
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+    }
+
+    // Parse response JSON
+    const data = await response.json();
+    
+    // Jika tidak ada user yang ditemukan (asumsikan API mengembalikan array)
+    if (data.length === 0) {
+      alert("No user found with the given ID");
+      return;
+    }
+
+    // Assign data ke users.value
+    users.value = data;
+
+  } catch (error) {
+    // Tangani error apa pun yang terjadi selama fetch atau pengolahan
+    console.error("Error fetching user data:", error);
+    alert("An error occurred while fetching the user data. Please try again later.");
+  }
 };
+
 
 
 const changeEmail = async () => {
