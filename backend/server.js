@@ -6,7 +6,7 @@ import cors from 'cors';
 
 const app = express();
 
-const allowedOrigins = ['http://20.11.65.60', 'http://20.11.65.60/pinceng', 'http://localhost', 'http://127.0.0.1'];
+const allowedOrigins = ['http://20.11.65.60', 'http://20.11.65.60/pinceng'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -20,21 +20,14 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }));
 
-
 app.use((req, res, next) => {
-  // Izinkan akses dari IP server (20.11.65.60) dan localhost untuk /pinceng atau /api
-  if (
-    (req.hostname === '20.11.65.60' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) ||
-    (req.hostname === 'localhost' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) ||
-    (req.hostname === '127.0.0.1' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api')))
-  ) {
+  // Izinkan akses hanya dari IP server 20.11.65.60 untuk /pinceng atau /api
+  if (req.hostname === '20.11.65.60' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) {
     next(); // Izinkan akses
   } else {
     res.status(403).send('Access denied');
   }
 });
-
-
 
 
 const connection = new sqlite3.Database('./db/aplikasi.db')
