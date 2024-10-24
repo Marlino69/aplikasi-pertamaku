@@ -6,7 +6,7 @@ import cors from 'cors';
 
 const app = express();
 
-const allowedOrigins = ['http://20.11.65.60', 'http://20.11.65.60/pinceng'];
+const allowedOrigins = ['http://20.11.65.60', 'http://20.11.65.60/pinceng', 'http://localhost', 'http://127.0.0.1'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -19,6 +19,7 @@ app.use(cors({
   },
   optionsSuccessStatus: 200,
 }));
+
 
 // Middleware untuk membatasi akses hanya ke /pinceng subdomain
 app.use((req, res, next) => {
