@@ -21,19 +21,19 @@ app.use(cors({
 }));
 
 
-// Middleware untuk membatasi akses hanya ke /pinceng subdomain
 app.use((req, res, next) => {
-  // Izinkan akses dari IP server (20.11.65.60) dan localhost untuk pengujian
+  // Izinkan akses dari IP server (20.11.65.60) dan localhost untuk /pinceng atau /api
   if (
-    (req.hostname === '20.11.65.60' && req.path.startsWith('/pinceng')) ||
-    (req.hostname === 'localhost' && req.path.startsWith('/pinceng')) ||
-    (req.hostname === '127.0.0.1' && req.path.startsWith('/pinceng'))
+    (req.hostname === '20.11.65.60' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) ||
+    (req.hostname === 'localhost' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) ||
+    (req.hostname === '127.0.0.1' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api')))
   ) {
     next(); // Izinkan akses
   } else {
     res.status(403).send('Access denied');
   }
 });
+
 
 
 
