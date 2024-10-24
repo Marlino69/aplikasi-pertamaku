@@ -1,8 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import CommentSection from './components/CommentSection.vue';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const userId = ref('');
 const users = ref(null);

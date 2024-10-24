@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.4.37",
-    "dompurify": "^2.3.3",
-    "dotenv": "^10.0.0"
+    "dompurify": "^2.3.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
