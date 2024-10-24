@@ -4,6 +4,8 @@ import { fileURLToPath } from 'url';
 import sqlite3 from 'sqlite3';
 import cors from 'cors';
 
+const app = express();
+
 const allowedOrigins = ['http://20.11.65.60', 'http://20.11.65.60/pinceng'];
 
 app.use(cors({
