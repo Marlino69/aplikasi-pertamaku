@@ -7,19 +7,27 @@ const users = ref(null);
 const newEmail = ref('');
 
 const getUser = async () => {
-  const response = await fetch(`http://localhost:3000/api/user/${userId.value}`);
+  const response = await fetch(`http://localhost:3000/api/user/${encodeURIComponent(userId.value)}`);
   users.value = await response.json();
 };
 
+
 const changeEmail = async () => {
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail.value);
+  if (!validEmail) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
   await fetch('http://localhost:3000/api/change-email', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: `email=${newEmail.value}`,
+    body: `email=${encodeURIComponent(newEmail.value)}`,
   });
 };
+
 </script>
 
 <template>
