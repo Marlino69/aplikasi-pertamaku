@@ -3,14 +3,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import sqlite3 from 'sqlite3';
 import cors from 'cors';
+require('dotenv').config();
 
 const app = express();
 
-const allowedOrigins = ['http://20.11.65.60', 'http://20.11.65.60/pinceng'];
-
+// CORS middleware
 app.use(cors({
   origin: function (origin, callback) {
-    // Cek apakah origin diperbolehkan
+    // Gunakan environment variable untuk allowedOrigins
+    const allowedOrigins = [process.env.ALLOWED_ORIGIN]; // Gunakan variabel dari .env
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -20,14 +21,17 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }));
 
+// Middleware akses berdasarkan hostname
 app.use((req, res, next) => {
-  // Izinkan akses hanya dari IP server 20.11.65.60 untuk /pinceng atau /api
-  if (req.hostname === '20.11.65.60' && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) {
+  // Gunakan environment variable untuk memeriksa hostname
+  const allowedHostname = process.env.ALLOWED_HOSTNAME;
+  if (req.hostname === allowedHostname && (req.path.startsWith('/pinceng') || req.path.startsWith('/api'))) {
     next(); // Izinkan akses
   } else {
     res.status(403).send('Access denied');
   }
 });
+
 
 
 const connection = new sqlite3.Database('./db/aplikasi.db')
