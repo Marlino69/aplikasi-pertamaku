@@ -23,12 +23,18 @@ app.use(cors({
 
 // Middleware untuk membatasi akses hanya ke /pinceng subdomain
 app.use((req, res, next) => {
-  if (req.hostname === '20.11.65.60' && req.path.startsWith('/pinceng')) {
+  // Izinkan akses dari IP server (20.11.65.60) dan localhost untuk pengujian
+  if (
+    (req.hostname === '20.11.65.60' && req.path.startsWith('/pinceng')) ||
+    (req.hostname === 'localhost' && req.path.startsWith('/pinceng')) ||
+    (req.hostname === '127.0.0.1' && req.path.startsWith('/pinceng'))
+  ) {
     next(); // Izinkan akses
   } else {
     res.status(403).send('Access denied');
   }
 });
+
 
 
 const connection = new sqlite3.Database('./db/aplikasi.db')
