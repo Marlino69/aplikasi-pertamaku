@@ -59,7 +59,7 @@ const changeEmail = async () => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-      body: `email=${newEmail.value}`,
+      body: "email"=`${newEmail.value}`,
   });
 };
 
