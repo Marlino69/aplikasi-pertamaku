@@ -58,7 +58,6 @@ const getUser = async () => {
 
 
 const changeEmail = async () => {
-  const userIdValue = userId.value.trim();
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail.value);
   if (!validEmail) {
     alert("Please enter a valid email address.");
