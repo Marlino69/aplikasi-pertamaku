@@ -57,7 +57,7 @@ const changeEmail = async () => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: `email=${encodeURIComponent(newEmail.value)}`,
+    body: {email:`${validEmail}`},
   });
 };
 
