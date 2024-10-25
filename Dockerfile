@@ -17,3 +17,9 @@ COPY --from=frontend /usr/src/frontend/dist ./public
 EXPOSE 5173
 EXPOSE 3000
 CMD ["pnpm", "start"]
+
+# NGINX
+FROM nginx:latest
+RUN apt-get update && apt-get install -y gettext-base
+COPY nginx/nginx.conf.template /etc/nginx/nginx.conf.template
+CMD /bin/bash -c "envsubst '\$USER_NAME' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"

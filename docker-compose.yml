@@ -31,11 +31,15 @@ services:
     command: pnpm run dev
 
   nginx:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/nginx.conf.template:/etc/nginx/nginx.conf.template:ro
+    environment:
+      - USER_NAME=${USER_NAME}
     depends_on:
       - frontend
       - backend
