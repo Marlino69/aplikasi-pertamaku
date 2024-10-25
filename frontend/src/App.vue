@@ -5,7 +5,7 @@ import CommentSection from './components/CommentSection.vue';
 const userId = ref('');
 const users = ref(null);
 const newEmail = ref('');
-const apiUrl = process.env.VUE_APP_API_URL;
+const apiUrl = `${import.meta.env.VUE_APP_API_URL}`;
 
 const getUser = async () => {
   try {
