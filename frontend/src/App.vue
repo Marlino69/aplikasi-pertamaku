@@ -58,7 +58,9 @@ const changeEmail = async () => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-      body: JSON.stringify({email: `${encodeURIComponent(newEmail.value)}`}),
+    body: new URLSearchParams({
+      email: sanitizeHTML(newEmail.value),
+    }).toString(),
   });
 };
 
