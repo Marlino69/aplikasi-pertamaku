@@ -52,7 +52,7 @@ const changeEmail = async () => {
     return;
   }
 
-  await fetch(`${apiUrl}/api/change-email`, {
+  await fetch(`${apiUrl}/api/user/:id/change-email`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
