@@ -52,6 +52,7 @@ const changeEmail = async () => {
     alert("Please enter a valid email address.");
     return;
   }
+  console.log(validEmail);
 
   await fetch(`${apiUrl}/api/user/${encodeURIComponent(userIdValue)}/change-email`, {
     method: 'POST',
