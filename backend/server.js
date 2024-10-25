@@ -49,9 +49,11 @@ app.post('/api/user/:id/change-email', (req, res) => {
   res.send(req.body)
   const newEmail = req.body.email;
   const query = `UPDATE users SET email = ? WHERE id = ?`; // Query diubah menjadi prepared statement
-  connection.run(query, [newEmail, req.params.id], function (err) {
-    if (err) throw err;
-    if (this.changes === 0 ) res.status(404).send('User not found');
+  const params = [newEmail, req.params.id];
+
+  connection.run(query, params, function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    if (this.changes === 0) res.status(404).send('User not found');
     else res.status(200).send('Email updated successfully');
   });
 });
