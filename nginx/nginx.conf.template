@@ -29,7 +29,7 @@ http {
         limit_req zone=one burst=20 nodelay;
         limit_conn addr 20;
 
-        location /pinceng/ {
+        location /${USER_NAME}/ {
             proxy_pass http://frontend;
             proxy_set_header Host $host;
             allow all;
