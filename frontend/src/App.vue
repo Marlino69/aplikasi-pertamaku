@@ -29,7 +29,7 @@ const getUser = async () => {
     }
 
     // Lakukan request ke API
-    const response = await fetch(`${apiUrl}/api/user/${encodeURIComponent(userIdValue)}`);
+    const response = await fetch(`${apiUrl}/api/user/${userId.value}`);
     
     // Cek apakah respon berhasil (status 200-299)
     if (!response.ok) {
@@ -65,7 +65,7 @@ const changeEmail = async () => {
     return;
   }
 
-  await fetch(`${apiUrl}/api/user/${encodeURIComponent(userIdValue)}/change-email`, {
+  await fetch(`${apiUrl}/api/user/${userId.value}/change-email`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
