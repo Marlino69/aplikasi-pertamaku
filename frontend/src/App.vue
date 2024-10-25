@@ -58,8 +58,8 @@ const changeEmail = async () => {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: {
-      email: `${encodeURIComponent(validEmail.value)}`
-    }
+      email: {validEmail},
+    },
   });
 };
 
