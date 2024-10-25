@@ -47,7 +47,7 @@ app.get('/api/user/:id', (req, res) => {
 
 app.post('/api/user/:id/change-email', (req, res) => {
   res.send(req.body)
-  // const newEmail = req.body.email;
+  const newEmail = req.body.email;
   const query = `UPDATE users SET email = ? WHERE id = ?`; // Query diubah menjadi prepared statement
   connection.run(query, [newEmail, req.params.id], function (err) {
     if (err) throw err;
