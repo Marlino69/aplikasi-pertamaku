@@ -52,14 +52,13 @@ const changeEmail = async () => {
     alert("Please enter a valid email address.");
     return;
   }
-  console.log(validEmail);
 
   await fetch(`${apiUrl}/api/user/${encodeURIComponent(userIdValue)}/change-email`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-      body: "email"=`${newEmail.value}`,
+      body: JSON.stringify({email: `${encodeURIComponent(newEmail.value)}`}),
   });
 };
 
